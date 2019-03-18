@@ -123,20 +123,23 @@ def hit(input_rowx,input_columnx):
         value=value+1
         print (value)
         print_map(mapview)
+
     else :
         print "YOU DID NOT HIT"
         mapview[input_row][input_column]="X"
         print_map(mapview)
-
+value2=0
 def pcHit(input_row,input_column):
     if mapWe[input_row][input_column]=="$" or mapWe[input_row][input_column]=="O" :
         print "YOU HIT (%s,%s)" %(input_row,input_column)
-        mapWeview   [input_row][input_column]="O"
+        mapWeview[input_row][input_column]="O"
         mapWe[input_row][input_column]="O"
         global value2
         value2=value2+1
         print (value2)
         print_map(mapWeview)
+
+
     else :
         print "YOU DID NOT HIT"
         mapWeview[input_row][input_column]="X"
@@ -168,7 +171,20 @@ def random():
     return bom
 
 
+def check(): #vurduktan sonra yakinindak' hedefleri vurma
+    k = [0,1, 2, 3,4,5]
+    l = [0,1,2,3,4, 5]
+
+    for i in range(0,5):
+        for j in range(0,5):
+            #print mapWeview[i][j] #vurulan gemiyi bulaşık
+            if mapWeview[i][j]== "0" :
+                pcHit(i+1,j)
+
+
 while True:
+
+
 
 
     #playertarget
@@ -179,9 +195,12 @@ while True:
     if input_row >= 0 and input_row <= 5 and input_column >= 0 and input_column <= 5 :
 
         hit(input_row,input_column)
-        print "==========="
+        print "=========="
         print "Enemy Attack"
         pcHit(random(),random())
+
+        check()
+
         #print (mapview.count("X"))
         if value==4 : #4 isabet yaptiginda kazaniyor.
             print "YOU WON"
